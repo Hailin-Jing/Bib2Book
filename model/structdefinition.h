@@ -1,0 +1,6 @@
+#ifndef STRUCTDEFINITION_H
+#define STRUCTDEFINITION_H
+
+#include <QVector>
+
+#endif // STRUCTDEFINITION_H

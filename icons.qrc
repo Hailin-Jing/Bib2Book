@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/exit.png</file>
+        <file>icons/new.png</file>
+        <file>icons/open.png</file>
+        <file>icons/save.png</file>
+        <file>icons/save_as.png</file>
+        <file>icons/run.png</file>
+        <file>icons/app_icon.ico</file>
+        <file>icons/window_tile.png</file>
+        <file>icons/window_cascade.png</file>
+        <file>icons/close.png</file>
+        <file>icons/next.png</file>
+        <file>icons/previous.png</file>
+        <file>icons/splash_screen.jpg</file>
+        <file>icons/file.png</file>
+        <file>icons/parameters.png</file>
+        <file>icons/about.png</file>
+        <file>icons/help.png</file>
+        <file>icons/result.png</file>
+        <file>icons/output.png</file>
+        <file>icons/language.png</file>
+    </qresource>
+</RCC>
