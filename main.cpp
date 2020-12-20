@@ -14,6 +14,14 @@ int main(int argc, char *argv[])
 
     MainWindow *window = applicationSetup(argc, argv);
 
+    // Set Font
+    int fontId = QFontDatabase::addApplicationFont(QCoreApplication::applicationDirPath() + "/fonts/cormorant-garamond/CormorantGaramond-Regular.ttf");
+    // qDebug() << "fontId = "<< fontId;
+    QString msyh = QFontDatabase::applicationFontFamilies(fontId).at(0);
+    // qDebug() <<"msyh = " <<msyh;
+    QFont font(msyh);
+    QApplication::setFont(font);
+
     window->show();
 
     return app.exec();
@@ -31,6 +39,10 @@ MainWindow *applicationSetup(int argc, char *argv[])
 
     // Create Registry
     registerFileRelation();
+
+    // QFontDatabase database;
+    // foreach(const QString &family, database.families(QFontDatabase::SimplifiedChinese))
+    //     qDebug() << family;
 
     // Open File By Double-click
     QString open_file_path = "";

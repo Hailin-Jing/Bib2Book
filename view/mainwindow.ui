@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1697</width>
-    <height>935</height>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>GRS Reinforcement Load Calculator</string>
+   <string>Bib2Book</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -112,8 +112,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1697</width>
-     <height>28</height>
+     <width>1000</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -486,69 +486,6 @@
     <string>Ctrl+Shift+W</string>
    </property>
   </action>
-  <action name="actionParameters">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../icons.qrc">
-     <normaloff>:/icons/parameters.png</normaloff>:/icons/parameters.png</iconset>
-   </property>
-   <property name="text">
-    <string>Parameters</string>
-   </property>
-   <property name="toolTip">
-    <string>Input Parameters</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionResult">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../icons.qrc">
-     <normaloff>:/icons/result.png</normaloff>:/icons/result.png</iconset>
-   </property>
-   <property name="text">
-    <string>Result</string>
-   </property>
-   <property name="toolTip">
-    <string>Result</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionDataFile">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../icons.qrc">
-     <normaloff>:/icons/file.png</normaloff>:/icons/file.png</iconset>
-   </property>
-   <property name="text">
-    <string>Data File</string>
-   </property>
-   <property name="toolTip">
-    <string>Data File</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-  </action>
   <action name="actionHelpDoc">
    <property name="icon">
     <iconset resource="../icons.qrc">
@@ -559,44 +496,6 @@
    </property>
    <property name="toolTip">
     <string>Help Documentation</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionOutput">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../icons.qrc">
-     <normaloff>:/icons/output.png</normaloff>:/icons/output.png</iconset>
-   </property>
-   <property name="text">
-    <string>To Current Directory</string>
-   </property>
-   <property name="toolTip">
-    <string>Export File To Current Directory</string>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-  </action>
-  <action name="actionOutputOther">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>To Other Directory</string>
-   </property>
-   <property name="toolTip">
-    <string>Export File To Other Directory</string>
    </property>
    <property name="font">
     <font>

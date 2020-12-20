@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "constraints.h"
 
 #include <QDropEvent>
 #include <QDragEnterEvent>
@@ -20,6 +21,8 @@ MainWindow::MainWindow(QString open_file_path, QWidget *parent) :
     ui->setupUi(this);
     this->setAcceptDrops(true);
     this->setAttribute(Qt::WA_DeleteOnClose);
+
+    setGlobalFont(QCoreApplication::applicationDirPath() + "/fonts/cormorant-garamond/CormorantGaramond-Regular.ttf", this);
 
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget*)),this, SLOT(setActiveSubWindow(QWidget*)));
@@ -88,7 +91,7 @@ void MainWindow::dropEvent(QDropEvent *event)
         return;
     foreach(QUrl url, urls) {
         QString file_name = url.toLocalFile();
-        if (!file_name.endsWith(".grs"))
+        if (!file_name.endsWith(".b2b"))
             continue;
         WorkingArea *area = new WorkingArea(file_name,sequenceNumber,this);
         WA.append(area);
@@ -147,7 +150,7 @@ void MainWindow::setActiveSubWindow(QWidget *window)
 
 void MainWindow::on_actionNewProject_triggered()
 {
-    WorkingArea *area = new WorkingArea(tr("File-%1.grs").arg(QString::number(sequenceNumber+1)), sequenceNumber, this);
+    WorkingArea *area = new WorkingArea(tr("File-%1.b2b").arg(QString::number(sequenceNumber+1)), sequenceNumber, this);
     WA.append(area);
     ui->mdiArea->addSubWindow(area);
     area->show();
@@ -156,7 +159,7 @@ void MainWindow::on_actionNewProject_triggered()
 void MainWindow::on_actionOpenProject_triggered()
 {
     QString file_name;
-    file_name = QFileDialog::getOpenFileName(this,tr("Open File"),QApplication::applicationDirPath(),tr("GRS Project File (*.grs)"));
+    file_name = QFileDialog::getOpenFileName(this,tr("Open file"),QApplication::applicationDirPath(),tr("Bib2Book Project File (*.b2b)"));
     if(file_name.simplified().isEmpty())
         return;
     else {
@@ -176,13 +179,13 @@ void MainWindow::on_actionSave_triggered()
             on_actionSaveAs_triggered();
         else {
             if (area->save(area->lastFileName()))
-                statusBar()->showMessage(tr("File %1 Saved Successfully").arg(area->lastFileName()), 4000);
+                statusBar()->showMessage(tr("File %1 saved successfully").arg(area->lastFileName()), 4000);
             else
-                statusBar()->showMessage(tr("File %1 Saved Failed").arg(area->lastFileName()), 4000);
+                statusBar()->showMessage(tr("File %1 saved failed").arg(area->lastFileName()), 4000);
         }
     }
     else
-        statusBar()->showMessage(tr("File Was Not Opened Or Created"), 4000);
+        statusBar()->showMessage(tr("File was not opened or created"), 4000);
 }
 
 void MainWindow::on_actionSaveAs_triggered()
@@ -190,16 +193,16 @@ void MainWindow::on_actionSaveAs_triggered()
     WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
     if (area != nullptr) {
         QFileDialog fileDialog;
-        QString filename = fileDialog.getSaveFileName(this,tr("Save File"),area->lastFileName(),tr("GRS Project File(*.grs)"));
+        QString filename = fileDialog.getSaveFileName(this,tr("Save file"),area->lastFileName(),tr("Bib2Book Project File(*.b2b)"));
         if(filename.simplified().isEmpty())
             return;
         if (area->save(filename))
-            statusBar()->showMessage(tr("File %1 Saved Successfully").arg(area->lastFileName()), 4000);
+            statusBar()->showMessage(tr("File %1 saved successfully").arg(area->lastFileName()), 4000);
         else
-            statusBar()->showMessage(tr("File %1 Saved Failed").arg(area->lastFileName()), 4000);
+            statusBar()->showMessage(tr("File %1 saved failed").arg(area->lastFileName()), 4000);
     }
     else
-        statusBar()->showMessage(tr("File Was Not Opened Or Created"), 4000);
+        statusBar()->showMessage(tr("File was not opened or created"), 4000);
 }
 
 void MainWindow::on_actionRun_triggered()
@@ -207,12 +210,12 @@ void MainWindow::on_actionRun_triggered()
     WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
     if (area != nullptr) {
         if (area->run())
-            statusBar()->showMessage(tr("Calculate Complete"), 4000);
+            statusBar()->showMessage(tr("Calculate complete"), 4000);
         else
-            statusBar()->showMessage(tr("File Was Not Opened Or Created"), 4000);
+            statusBar()->showMessage(tr("File was not opened or created"), 4000);
     }
     else
-        statusBar()->showMessage(tr("File Was Not Opened Or Created"), 4000);
+        statusBar()->showMessage(tr("File was not opened or created"), 4000);
 }
 
 void MainWindow::on_actionHelpDoc_triggered()
@@ -220,12 +223,12 @@ void MainWindow::on_actionHelpDoc_triggered()
     QString filename = QApplication::applicationDirPath() + "/documentation/doc.pdf";
     bool is_Open = QDesktopServices::openUrl(QUrl::fromLocalFile(filename));
     if (!is_Open)
-        QMessageBox::critical(this,tr("Error"),tr("Help Documentation Open Failed, The Path Is: ") + filename);
+        QMessageBox::critical(this,tr("Error"),tr("Documentation ppen failed, the path is: ") + filename);
 }
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, tr("About"), tr("This Is A GRS Reinforcement Load Calculation Program"));
+    QMessageBox::about(this, tr("About"), tr("This is a program that converts biblipgraphies to a book"));
 }
 
 void MainWindow::on_actionDataFile_triggered()
@@ -237,67 +240,6 @@ void MainWindow::on_actionDataFile_triggered()
     }
 }
 
-void MainWindow::on_actionParameters_triggered()
-{
-    WorkingArea *area = nullptr;
-    if (ui->mdiArea->activeSubWindow()) {
-        area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-        area->UI()->listWidget->setCurrentRow(1);
-    }
-}
-
-void MainWindow::on_actionResult_triggered()
-{
-    WorkingArea *area = nullptr;
-    if (ui->mdiArea->activeSubWindow()) {
-        area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-        area->UI()->listWidget->setCurrentRow(2);
-    }
-}
-
-void MainWindow::on_actionOutput_triggered()
-{
-    WorkingArea *area = nullptr;
-    if (ui->mdiArea->activeSubWindow()) {
-        area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-        QString file_name;
-        if (area->isNew()) {
-            QFileDialog fileDialog;
-            file_name = fileDialog.getSaveFileName(this,tr("Save File"), tr("%1-output").arg(area->lastFileName()),tr("Comma-Separated File(*.csv)"));
-            if(file_name.simplified().isEmpty())
-                return;
-        }
-        else {
-            QString Last_FileName = area->lastFileName();
-            file_name = Last_FileName.mid(0, Last_FileName.lastIndexOf(".grs")) + "-output.csv";
-        }
-        if (area->saveOutput(file_name))
-            statusBar()->showMessage(tr("Output File %1 Saved Successfully").arg(file_name), 4000);
-        else
-            statusBar()->showMessage(tr("Output File %1 Saved Failed").arg(file_name), 4000);
-    }
-    else
-        QMessageBox::critical(this,tr("Error"),tr("File Was Not Opened Or Created"));
-}
-
-void MainWindow::on_actionOutputOther_triggered()
-{
-    WorkingArea *area = nullptr;
-    if (ui->mdiArea->activeSubWindow()) {
-        area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-        QFileDialog fileDialog;
-        QString Last_FileName = area->lastFileName();
-        QString file_name = fileDialog.getSaveFileName(this,tr("Save File"),Last_FileName.mid(0, Last_FileName.lastIndexOf(".grs")) + "-output.csv",tr("Comma-Separated File(*.csv)"));
-        if(file_name.simplified().isEmpty())
-            return;
-        if (area->saveOutput(file_name))
-            statusBar()->showMessage(tr("Output File %1 Saved Successfully").arg(file_name), 4000);
-        else
-            statusBar()->showMessage(tr("Output File %1 Saved Failed").arg(file_name), 4000);
-    }
-    else
-        QMessageBox::critical(this,tr("Error"),tr("File Was Not Opened Or Created"));
-}
 
 void MainWindow::on_actionChinese_triggered()
 {
@@ -307,7 +249,7 @@ void MainWindow::on_actionChinese_triggered()
         return;
     QApplication::beep();
     QMessageBox::StandardButton button =
-            QMessageBox::question(this,tr("Info"),tr("Program Needs To Rebot To Save Settings, Otherwise There Will Be Some Problems, Reboot?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+            QMessageBox::question(this,tr("Info"),tr("Program needs to rebot to save settings, otherwise there will be some problems, reboot?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
     if (button == QMessageBox::Yes) {
         ui->actionChinese->setChecked(true);
         ui->actionEnglish->setChecked(false);
@@ -337,7 +279,7 @@ void MainWindow::on_actionEnglish_triggered()
         return;
     QApplication::beep();
     QMessageBox::StandardButton button =
-            QMessageBox::question(this,tr("Info"),tr("Program Needs To Rebot To Save Settings, Otherwise There Will Be Some Problems, Reboot?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+            QMessageBox::question(this,tr("Info"),tr("Program needs to rebot to save settings, otherwise there will be some problems, reboot?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
     if (button == QMessageBox::Yes) {
         ui->actionEnglish->setChecked(true);
         ui->actionChinese->setChecked(false);

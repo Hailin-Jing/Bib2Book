@@ -17,6 +17,8 @@ WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
     setAttribute(Qt::WA_DeleteOnClose);
     PRO = new Project();
 
+    setGlobalFont(QCoreApplication::applicationDirPath() + "/fonts/cormorant-garamond/CormorantGaramond-Regular.ttf", this);
+
     this->ID = ID;
     Last_FileName = filename;
     setWindowTitle(Last_FileName);
@@ -29,11 +31,6 @@ WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
         window->UI()->actionSave->setEnabled(true);
         window->UI()->actionSaveAs->setEnabled(true);
         window->UI()->actionRun->setEnabled(true);
-        window->UI()->actionDataFile->setEnabled(true);
-        window->UI()->actionParameters->setEnabled(true);
-        window->UI()->actionResult->setEnabled(true);
-        window->UI()->actionOutput->setEnabled(true);
-        window->UI()->actionOutputOther->setEnabled(true);
     }
 }
 
@@ -52,13 +49,13 @@ bool WorkingArea::open(QString file_name)
     QFile file(file_name);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::warning(this,tr("Error"),tr("Open File Failed"));
+        QMessageBox::warning(this,tr("Error"),tr("Open file failed"));
         return false;
     }
     else
     {
         if(!file.isReadable()) {
-            QMessageBox::warning(this,tr("Error"),tr("File Unreadable"));
+            QMessageBox::warning(this,tr("Error"),tr("File unreadable"));
             return false;
         }
         else
@@ -80,7 +77,7 @@ bool WorkingArea::save(QString file_name)
     QFile file(file_name);
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        QMessageBox::warning(this,tr("Error"),tr("Open File Failed"),QMessageBox::Ok);
+        QMessageBox::warning(this,tr("Error"),tr("Open file failed"),QMessageBox::Ok);
         return false;
     }
     else
@@ -152,20 +149,20 @@ void WorkingArea::saveProject()
 {
     QApplication::beep();
     QMessageBox::StandardButton button =
-            QMessageBox::question(this,tr("Info"),tr("File %1 Has Not Been Saved, Whether To Save The File?").arg(Last_FileName),
+            QMessageBox::question(this,tr("Info"),tr("File %1 has not been saved, whether to save the file?").arg(Last_FileName),
                                   QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
     if (button == QMessageBox::Yes) {
         if(!Flag_IsNew)
             save(Last_FileName);
         else {
             QFileDialog fileDialog;
-            QString filename = fileDialog.getSaveFileName(this,tr("Save File"),Last_FileName,tr("GRS Project File(*.grs)"));
+            QString filename = fileDialog.getSaveFileName(this,tr("Save file"),Last_FileName,tr("Bib2Book Project File(*.b2b)"));
             if(filename.simplified().isEmpty())
                 return;
             save(filename);
         }
         QMainWindow *window = qobject_cast<QMainWindow*>(parent);
-        window->statusBar()->showMessage(tr("File %1 Saved Successfully").arg(Last_FileName), 2000);
+        window->statusBar()->showMessage(tr("File %1 saved successfully").arg(Last_FileName), 2000);
     }
 }
 

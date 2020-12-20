@@ -49,11 +49,7 @@ protected slots:
 private slots:
     void on_actionAbout_triggered();
     void on_actionDataFile_triggered();
-    void on_actionParameters_triggered();
-    void on_actionResult_triggered();
     void on_actionHelpDoc_triggered();
-    void on_actionOutput_triggered();
-    void on_actionOutputOther_triggered();
     void on_actionChinese_triggered();
     void on_actionEnglish_triggered();
 
