@@ -54,7 +54,6 @@ private slots:
     void on_actionMove_Down_triggered();
     void on_actionRemove_triggered();
     void on_actionGenerate_TeX_File_triggered();
-
     void on_actionCompile_triggered();
 
 private:

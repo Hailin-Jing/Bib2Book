@@ -39,6 +39,8 @@ public:
 
     void saveProject();
 
+    void openDirectory();
+
     bool open(QString file_name);
     bool saveFile(QString file_name, QString text, bool project = false);
     bool save(QString file_name);

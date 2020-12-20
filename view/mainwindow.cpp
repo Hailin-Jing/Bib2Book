@@ -313,11 +313,13 @@ void MainWindow::on_actionRemove_triggered()
 
 void MainWindow::on_actionGenerate_TeX_File_triggered()
 {
-    on_actionSave_triggered();
     WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    on_actionSave_triggered();
     if (area != nullptr) {
-        if (area->generate())
+        if (area->generate()) {
             statusBar()->showMessage(tr("TeX file generated!"), 4000);
+            area->openDirectory();
+        }
     }
     else
         statusBar()->showMessage(tr("No window is selected!"), 4000);
@@ -330,6 +332,7 @@ void MainWindow::on_actionCompile_triggered()
         if (area->compile()) {
             statusBar()->showMessage(tr("TeX file generated!"), 4000);
             QMessageBox::information(this, "Successfully", "Compiled Successfully!");
+            area->openDirectory();
         }
     }
     else {

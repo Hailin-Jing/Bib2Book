@@ -81,14 +81,16 @@ QString Project::generate()
                      "\t\\begin{center}\n"
                      "\t\t\\bfseries\\centering\\Large Table of Contents\n"
                      "\t\\end{center}\n"
-                     "\t\\par\n\n"
-                     "\t\\begin{itemize}\n");
-    for(int i = 0; i < Bibliogarphies.length(); i++)
-        TeXString.append("\t\t\\item[\\textcolor{red}{" + BibliogarphiesPrefix[i] + "}] "
-                         + BibliogarphiesName[i] + " \\hfill\\textcolor{red}{\\pageref{label:"
-                         + QString::number(i + 1) + "}}\n");
-    TeXString.append("\t\\end{itemize}\n"
-                     "\t\\cleardoublepage\n\n"
+                     "\t\\par\n\n");
+    if (Bibliogarphies.length() > 0) {
+        TeXString.append("\t\\begin{itemize}\n");
+        for(int i = 0; i < Bibliogarphies.length(); i++)
+            TeXString.append("\t\t\\item[\\textcolor{red}{" + BibliogarphiesPrefix[i] + "}] "
+                             + BibliogarphiesName[i] + " \\hfill\\textcolor{red}{\\pageref{label:"
+                             + QString::number(i + 1) + "}}\n");
+        TeXString.append("\t\\end{itemize}\n");
+    }
+    TeXString.append("\t\\cleardoublepage\n\n"
                      "\t\\includepdfset{pagecommand={\\thispagestyle{headings}}}\n"
                      "\t\\setcounter{page}{1}\n\n");
     for(int i = 0; i < Bibliogarphies.length(); i++) {

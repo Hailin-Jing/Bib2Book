@@ -11,6 +11,7 @@
 #include <QTextStream>
 #include <QDesktopServices>
 #include <QTextCodec>
+#include <QProcess>
 
 WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
     QWidget(parent),
@@ -386,6 +387,12 @@ void WorkingArea::saveProject()
         QMainWindow *window = qobject_cast<QMainWindow*>(parent);
         window->statusBar()->showMessage(tr("File %1 saved successfully").arg(Last_FileName), 2000);
     }
+}
+
+void WorkingArea::openDirectory()
+{
+    QFileInfo fileInfo(Last_FileName);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fileInfo.path()));
 }
 
 void WorkingArea::on_listWidget_currentRowChanged(int currentRow)
