@@ -19,13 +19,13 @@ QString Project::fileText()
     text.append(QString("Author").leftJustified(10,' ') + " = " + this->Author + "\n");
     text.append(QString("Ack").leftJustified(10,' ') + " = " + this->Ack + "\n");
     text.append("\n***************** Biblipgraphies Information *****************");
-    text.append("\n     <Separator> " + QString("Prefix <Separator> ")
-                                      + QString("Name <Separator> ")
-                                      + QString("Path") + "\n");
+    text.append("\n     && " + QString("Label && ")
+                             + QString("Name && ")
+                             + QString("Path") + "\n");
     for(int i = 0; i < Bibliogarphies.length(); i++) {
-        text.append("  #  <Separator> " + BibliogarphiesPrefix[i] + " <Separator> "
-                                        + BibliogarphiesName[i] + " <Separator> "
-                                        + Bibliogarphies[i] + "\n");
+        text.append("  #  && " + BibliogarphiesPrefix[i] + " && "
+                               + BibliogarphiesName[i] + " && "
+                               + Bibliogarphies[i] + "\n");
     }
     return text;
 }
@@ -54,9 +54,9 @@ void Project::readString(QString text)
         else if (line.simplified().startsWith("Ack"))
             Ack = line.split("=").at(1).simplified();
         else if (line.simplified().startsWith("#")) {
-            Bibliogarphies.append(line.split("<Separator>").at(3).simplified());
-            BibliogarphiesPrefix.append(line.split("<Separator>").at(1).simplified());
-            BibliogarphiesName.append(line.split("<Separator>").at(2).simplified());
+            Bibliogarphies.append(line.split("&&").at(3).simplified());
+            BibliogarphiesPrefix.append(line.split("&&").at(1).simplified());
+            BibliogarphiesName.append(line.split("&&").at(2).simplified());
         }
     }
 }
