@@ -48,7 +48,7 @@ MainWindow *applicationSetup(int argc, char *argv[])
     QString open_file_path = "";
     if (argc > 1)
         open_file_path = QString::fromLocal8Bit(argv[1]);
-    if (!open_file_path.endsWith(".grs"))
+    if (!open_file_path.endsWith(".b2b"))
         open_file_path = "";
     MainWindow *window = new MainWindow(open_file_path);
 
@@ -72,7 +72,7 @@ void registerFileRelation()
 {
     QString className("Bib2Book");
     QString appPath = QApplication::applicationFilePath().replace("/","\\");
-    QString ext(".grs");
+    QString ext(".b2b");
     QString extDes("Bib2Book_Project_File");
 
     QString baseUrl("HKEY_CURRENT_USER\\Software\\Classes");

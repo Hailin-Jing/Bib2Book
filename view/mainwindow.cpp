@@ -30,10 +30,11 @@ MainWindow::MainWindow(QString open_file_path, QWidget *parent) :
     connect(ui->menu_window, SIGNAL(aboutToShow()), this, SLOT(undateWindowMenu()));
 
     if (!open_file_path.isEmpty()) {
-        WorkingArea *area = new WorkingArea(open_file_path, sequenceNumber, nullptr);
+        WorkingArea *area = new WorkingArea(open_file_path, sequenceNumber, this);
         WA.append(area);
         ui->mdiArea->addSubWindow(area);
         area->show();
+        area->showMaximized();
         area->open(open_file_path);
     }
     trans = new QTranslator();

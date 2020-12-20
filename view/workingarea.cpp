@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QDesktopServices>
+#include <QTextCodec>
 
 WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
     QWidget(parent),
@@ -97,6 +98,7 @@ void WorkingArea::dropEvent(QDropEvent *event)
 
 bool WorkingArea::open(QString file_name)
 {
+    QTextCodec *codec = QTextCodec::codecForName("GBK");
     QFile file(file_name);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -112,6 +114,7 @@ bool WorkingArea::open(QString file_name)
         else
         {
             QTextStream textStream(&file);
+            textStream.setCodec("utf-8");
             while(!textStream.atEnd())
                 PRO->readString(textStream.readAll());
             file.close();
