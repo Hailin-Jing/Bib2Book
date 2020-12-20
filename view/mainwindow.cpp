@@ -23,6 +23,7 @@ MainWindow::MainWindow(QString open_file_path, QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     setGlobalFont(QCoreApplication::applicationDirPath() + "/fonts/cormorant-garamond/CormorantGaramond-Regular.ttf", this);
+    setGlobalFont(QCoreApplication::applicationDirPath() + "/fonts/cormorant-garamond/CormorantGaramond-Regular.ttf", ui->menu_file);
 
     windowMapper = new QSignalMapper(this);
     connect(windowMapper, SIGNAL(mapped(QWidget*)),this, SLOT(setActiveSubWindow(QWidget*)));
@@ -97,6 +98,7 @@ void MainWindow::dropEvent(QDropEvent *event)
         WA.append(area);
         ui->mdiArea->addSubWindow(area);
         area->show();
+        area->showMaximized();
         area->open(file_name);
     }
 }
@@ -154,6 +156,7 @@ void MainWindow::on_actionNewProject_triggered()
     WA.append(area);
     ui->mdiArea->addSubWindow(area);
     area->show();
+    area->showMaximized();
 }
 
 void MainWindow::on_actionOpenProject_triggered()
@@ -167,6 +170,7 @@ void MainWindow::on_actionOpenProject_triggered()
         WA.append(area);
         ui->mdiArea->addSubWindow(area);
         area->show();
+        area->showMaximized();
         area->open(file_name);
     }
 }
@@ -205,19 +209,6 @@ void MainWindow::on_actionSaveAs_triggered()
         statusBar()->showMessage(tr("File was not opened or created"), 4000);
 }
 
-void MainWindow::on_actionRun_triggered()
-{
-    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-    if (area != nullptr) {
-        if (area->run())
-            statusBar()->showMessage(tr("Calculate complete"), 4000);
-        else
-            statusBar()->showMessage(tr("File was not opened or created"), 4000);
-    }
-    else
-        statusBar()->showMessage(tr("File was not opened or created"), 4000);
-}
-
 void MainWindow::on_actionHelpDoc_triggered()
 {
     QString filename = QApplication::applicationDirPath() + "/documentation/doc.pdf";
@@ -230,16 +221,6 @@ void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About"), tr("This is a program that converts biblipgraphies to a book"));
 }
-
-void MainWindow::on_actionDataFile_triggered()
-{
-    WorkingArea *area = nullptr;
-    if (ui->mdiArea->activeSubWindow()) {
-        area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
-        area->UI()->listWidget->setCurrentRow(0);
-    }
-}
-
 
 void MainWindow::on_actionChinese_triggered()
 {
@@ -296,5 +277,62 @@ void MainWindow::on_actionEnglish_triggered()
         QSettings settings("WWB-Qt","Bib2Book");
         settings.setValue("Language",language::English);
         reboot();
+    }
+}
+
+void MainWindow::on_actionMove_Up_triggered()
+{
+    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (area != nullptr) {
+        area->moveUp();
+    }
+    else
+        statusBar()->showMessage(tr("No window is selected!"), 4000);
+}
+
+void MainWindow::on_actionMove_Down_triggered()
+{
+    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (area != nullptr) {
+        area->moveDown();
+    }
+    else
+        statusBar()->showMessage(tr("No window is selected!"), 4000);
+}
+
+void MainWindow::on_actionRemove_triggered()
+{
+    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (area != nullptr) {
+        area->remove();
+    }
+    else
+        statusBar()->showMessage(tr("No window is selected!"), 4000);
+}
+
+void MainWindow::on_actionGenerate_TeX_File_triggered()
+{
+    on_actionSave_triggered();
+    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (area != nullptr) {
+        if (area->generate())
+            statusBar()->showMessage(tr("TeX file generated!"), 4000);
+    }
+    else
+        statusBar()->showMessage(tr("No window is selected!"), 4000);
+}
+
+void MainWindow::on_actionCompile_triggered()
+{
+    WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (area != nullptr) {
+        if (area->compile()) {
+            statusBar()->showMessage(tr("TeX file generated!"), 4000);
+            QMessageBox::information(this, "Successfully", "Compiled Successfully!");
+        }
+    }
+    else {
+        statusBar()->showMessage(tr("No window is selected!"), 4000);
+        QMessageBox::information(this, "Successfully", "Compiled failed!");
     }
 }

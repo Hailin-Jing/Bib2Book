@@ -41,17 +41,21 @@ protected slots:
     void on_actionOpenProject_triggered();
     void on_actionSaveAs_triggered();
     void on_actionSave_triggered();
-    void on_actionRun_triggered();
 
     void undateWindowMenu();
     void setActiveSubWindow(QWidget *window);
 
 private slots:
     void on_actionAbout_triggered();
-    void on_actionDataFile_triggered();
     void on_actionHelpDoc_triggered();
     void on_actionChinese_triggered();
     void on_actionEnglish_triggered();
+    void on_actionMove_Up_triggered();
+    void on_actionMove_Down_triggered();
+    void on_actionRemove_triggered();
+    void on_actionGenerate_TeX_File_triggered();
+
+    void on_actionCompile_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -20,5 +20,9 @@
         <file>icons/result.png</file>
         <file>icons/output.png</file>
         <file>icons/language.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/down.png</file>
+        <file>icons/up.png</file>
+        <file>icons/Compile.png</file>
     </qresource>
 </RCC>

@@ -22,6 +22,25 @@ private:
 public:
     Project();
 
+    QString title() {
+        return Title;
+    }
+    QString author() {
+        return Author;
+    }
+    QString ack() {
+        return Ack;
+    }
+    QStringList bibliogarphies() {
+        return Bibliogarphies;
+    }
+    QStringList bibliogarphiesPrefix() {
+        return BibliogarphiesPrefix;
+    }
+    QStringList bibliogarphiesName() {
+        return BibliogarphiesName;
+    }
+
     void setTitle(QString title){
         this->Title = title;
     }
@@ -56,11 +75,21 @@ public:
         BibliogarphiesPrefix.swapItemsAt(i, j);
         BibliogarphiesName.swapItemsAt(i, j);
     }
+    void remove(int i) {
+        if (i < 0 || i >= Bibliogarphies.length()) {
+            qDebug("Swap Error");
+            return;
+        }
+        Bibliogarphies.removeAt(i);
+        BibliogarphiesPrefix.removeAt(i);
+        BibliogarphiesName.removeAt(i);
+    }
 
     QString fileText();
     void readString(QString text);
 
-    void generate();
+    QString generate();
+    QString generateCover();
 
 protected:
 

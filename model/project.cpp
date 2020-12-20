@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <QVector>
+#include <QFileInfo>
 
 Project::Project()
 {
@@ -58,4 +59,59 @@ void Project::readString(QString text)
             BibliogarphiesName.append(line.split("<Separator>").at(2).simplified());
         }
     }
+}
+
+QString Project::generate()
+{
+    QString TeXString;
+    TeXString.append("\\documentclass[12pt]{book}\n\n"
+                     "\\usepackage{pdfpages}\n"
+                     "\\usepackage{hyperref}\n"
+                     "\\usepackage{xeCJK}\n"
+                     "\\usepackage{xcolor}\n"
+                     "\\usepackage[top=2cm, bottom=2cm, left=4cm, right=3cm]{geometry}\n"
+                     "\\pagestyle{empty}\n\n"
+                     "\\tolerance=1\n"
+                     "\\emergencystretch=\\maxdimen\n"
+                     "\\hyphenpenalty=10000\n"
+                     "\\hbadness=10000\n\n"
+                     "\\begin{document}\n"
+                     "\t\\includepdf{Cover.pdf}\n"
+                     "\t\\cleardoublepage\n\n"
+                     "\t\\begin{center}\n"
+                     "\t\t\\bfseries\\centering\\Large Table of Contents\n"
+                     "\t\\end{center}\n"
+                     "\t\\par\n\n"
+                     "\t\\begin{itemize}\n");
+    for(int i = 0; i < Bibliogarphies.length(); i++)
+        TeXString.append("\t\t\\item[\\textcolor{red}{" + BibliogarphiesPrefix[i] + "}] "
+                         + BibliogarphiesName[i] + " \\hfill\\textcolor{red}{\\pageref{label:"
+                         + QString::number(i + 1) + "}}\n");
+    TeXString.append("\t\\end{itemize}\n"
+                     "\t\\cleardoublepage\n\n"
+                     "\t\\includepdfset{pagecommand={\\thispagestyle{headings}}}\n"
+                     "\t\\setcounter{page}{1}\n\n");
+    for(int i = 0; i < Bibliogarphies.length(); i++) {
+        TeXString.append("\t\\label{label:" + QString::number(i + 1) + "}\n");
+        QFileInfo fileInfo(Bibliogarphies[i]);
+        TeXString.append("\t\\includepdf[pages=1-last]{PDFs/"+ BibliogarphiesName[i] + ".pdf}\n");
+    }
+    TeXString.append("\n\\end{document}");
+
+    return TeXString;
+}
+
+QString Project::generateCover()
+{
+    QString coverTeXString;
+    coverTeXString.append("\\documentclass{article}\n\n"
+                          "\\usepackage{aicescover}\n"
+                          "\\usepackage{hyperref}\n\n"
+                          "\\begin{document}\n"
+                          "\t\\aicescovertitle{" + Title + "}\n"
+                          "\t\\aicescoverauthor{" + Author + "}\n"
+                          "\t\\aicescoverack{" + Ack + "}\n\n"
+                          "\t\\aicescoverpage\n"
+                          "\\end{document}\n");
+    return coverTeXString;
 }

@@ -18,8 +18,8 @@
   </property>
   <property name="font">
    <font>
-    <family>Courier New</family>
-    <pointsize>11</pointsize>
+    <family>Cormorant Garamond</family>
+    <pointsize>12</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -98,6 +98,13 @@
    <addaction name="actionOpenProject"/>
    <addaction name="actionSave"/>
    <addaction name="actionSaveAs"/>
+   <addaction name="separator"/>
+   <addaction name="actionMove_Up"/>
+   <addaction name="actionMove_Down"/>
+   <addaction name="actionRemove"/>
+   <addaction name="separator"/>
+   <addaction name="actionGenerate_TeX_File"/>
+   <addaction name="actionCompile"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="font">
@@ -134,7 +141,7 @@
    <widget class="QMenu" name="menu_file">
     <property name="font">
      <font>
-      <family>Courier New</family>
+      <family>Cormorant Garamond</family>
       <pointsize>11</pointsize>
      </font>
     </property>
@@ -203,8 +210,20 @@
     </widget>
     <addaction name="menuLanguage"/>
    </widget>
+   <widget class="QMenu" name="menuAction">
+    <property name="title">
+     <string>Action</string>
+    </property>
+    <addaction name="actionMove_Up"/>
+    <addaction name="actionMove_Down"/>
+    <addaction name="actionRemove"/>
+    <addaction name="separator"/>
+    <addaction name="actionGenerate_TeX_File"/>
+    <addaction name="actionCompile"/>
+   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_Option"/>
+   <addaction name="menuAction"/>
    <addaction name="menu_window"/>
    <addaction name="menu_help"/>
   </widget>
@@ -224,8 +243,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -245,8 +264,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -269,8 +288,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -338,8 +357,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -359,8 +378,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
   </action>
@@ -377,8 +396,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -398,8 +417,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -419,8 +438,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -440,8 +459,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -461,8 +480,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -478,8 +497,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="shortcut">
@@ -499,8 +518,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
   </action>
@@ -516,8 +535,8 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
   </action>
@@ -533,9 +552,65 @@
    </property>
    <property name="font">
     <font>
-     <family>Courier New</family>
-     <pointsize>11</pointsize>
+     <family>Cormorant Garamond</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+  </action>
+  <action name="actionMove_Up">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/up.png</normaloff>:/icons/up.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Up</string>
+   </property>
+  </action>
+  <action name="actionMove_Down">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/down.png</normaloff>:/icons/down.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move Down</string>
+   </property>
+  </action>
+  <action name="actionRemove">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+  </action>
+  <action name="actionGenerate_TeX_File">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/run.png</normaloff>:/icons/run.png</iconset>
+   </property>
+   <property name="text">
+    <string>Generate TeX File</string>
+   </property>
+  </action>
+  <action name="actionCompile">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Compile</string>
    </property>
   </action>
  </widget>

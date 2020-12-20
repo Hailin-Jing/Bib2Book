@@ -1,6 +1,9 @@
 #ifndef WORKINGAREA_H
 #define WORKINGAREA_H
 
+#include <QFileSystemModel>
+#include <QStandardItemModel>
+#include <QItemSelectionModel>
 #include <QWidget>
 
 #include "project.h"
@@ -21,20 +24,31 @@ class WorkingArea : public QWidget
     bool Flag_IsSaved = false;
     bool Flag_IsRan = false;
     QString Last_FileName;
+    QString CurrentRootPath;
 
+    QFileSystemModel *FileModel;
+    QStandardItemModel *TableModel;
+    QItemSelectionModel *SelectionModel;
 
 public:
     explicit WorkingArea(QString filename, int ID, QWidget *parent = nullptr);
     ~WorkingArea();
 
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+
     void saveProject();
 
     bool open(QString file_name);
+    bool saveFile(QString file_name, QString text, bool project = false);
     bool save(QString file_name);
-    bool run();
+    bool saveTex(QString file_name);
+    bool saveCoverTex(QString file_name);
+    bool generate();
+    bool compile();
+    bool copyFiles();
+    bool generateBatFiles();
     void refresh();
-
-    bool saveOutput(QString file_name);
 
     //bool isOpen();
     bool isNew();
@@ -43,13 +57,24 @@ public:
     QString lastFileName();
 
     void setSavedState(bool Flag_IsSaved);
-
     Project *project();
+
+    void moveUp();
+    void moveDown();
+    void remove();
+
+    void addFile(QString);
 
     Ui::WorkingArea *UI();
 
 private slots:
     void on_listWidget_currentRowChanged(int currentRow);
+    void on_listView_doubleClicked(const QModelIndex &index);
+    void on_title_textChanged();
+    void on_author_textChanged();
+    void on_ack_textChanged();
+    void on_currentChanged(const QModelIndex &, const QModelIndex &);
+    void on_treeView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::WorkingArea *ui;
