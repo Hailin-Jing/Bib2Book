@@ -106,6 +106,7 @@ QString Project::generateCover()
     QString coverTeXString;
     coverTeXString.append("\\documentclass{article}\n\n"
                           "\\usepackage{aicescover}\n"
+                          "\\usepackage{xeCJK}\n"
                           "\\usepackage{hyperref}\n\n"
                           "\\begin{document}\n"
                           "\t\\aicescovertitle{" + Title + "}\n"

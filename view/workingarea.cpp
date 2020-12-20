@@ -150,6 +150,7 @@ bool WorkingArea::saveFile(QString file_name, QString text, bool project)
     else
     {
         QTextStream textStream(&file);
+        textStream.setCodec("utf-8");
         textStream << text;
         file.close();
         Flag_IsNew = false;
