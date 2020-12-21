@@ -1,4 +1,4 @@
-# Bib2Book - A program to organize documents into a book
+# Bib2Book - A program to merge documents into a book
 
 ## Requirements
 
