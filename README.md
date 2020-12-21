@@ -1,5 +1,5 @@
-# Bib2Book - A program to merge documents into a book
-
+# Bib2Book - A program to put your bibliographies together.
+E
 ## Requirements
 
 Before installtion, some necessary environments are needed.
