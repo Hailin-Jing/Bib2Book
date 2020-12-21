@@ -353,7 +353,7 @@ void WorkingArea::addFile(QString filePath)
     }
     QFileInfo fileInfo(filePath);
     QString Name = fileInfo.fileName().replace(".pdf","");
-    Name.replace("~","-").replace("_","-").replace(" ","-");
+    Name.replace("~","-").replace("_","-").replace("+","-");
     QString Label = QString::number(TableModel->rowCount() + 1);
     QStandardItem *LabelItem = new QStandardItem(Label);
     QStandardItem *NameItem = new QStandardItem(Name);

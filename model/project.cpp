@@ -86,7 +86,7 @@ QString Project::generate()
         TeXString.append("\t\\begin{itemize}\n");
         for(int i = 0; i < Bibliogarphies.length(); i++)
             TeXString.append("\t\t\\item[\\textcolor{red}{" + BibliogarphiesPrefix[i] + "}] "
-                             + BibliogarphiesName[i] + " \\hfill\\textcolor{red}{\\pageref{label:"
+                             + BibliogarphiesName[i] + " \\hfill\\textcolor{red}{\\pageref{bib:"
                              + QString::number(i + 1) + "}}\n");
         TeXString.append("\t\\end{itemize}\n");
     }
@@ -94,7 +94,7 @@ QString Project::generate()
                      "\t\\includepdfset{pagecommand={\\thispagestyle{headings}}}\n"
                      "\t\\setcounter{page}{1}\n\n");
     for(int i = 0; i < Bibliogarphies.length(); i++) {
-        TeXString.append("\t\\label{label:" + QString::number(i + 1) + "}\n");
+        TeXString.append("\t\\label{bib:" + QString::number(i + 1) + "}\n");
         QFileInfo fileInfo(Bibliogarphies[i]);
         TeXString.append("\t\\includepdf[pages=1-last]{PDFs/"+ BibliogarphiesName[i] + ".pdf}\n");
     }
