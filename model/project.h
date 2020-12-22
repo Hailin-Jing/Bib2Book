@@ -84,6 +84,11 @@ public:
         BibliogarphiesPrefix.removeAt(i);
         BibliogarphiesName.removeAt(i);
     }
+    void modify(int i, QString bibliogarphyPrefix, QString bibliogarphyName, QString bibliogarphy) {
+        Bibliogarphies[i] = bibliogarphy;
+        BibliogarphiesPrefix[i] = bibliogarphyPrefix;
+        BibliogarphiesName[i] = bibliogarphyName;
+    }
 
     QString fileText();
     void readString(QString text);

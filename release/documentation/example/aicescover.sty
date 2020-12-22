@@ -1,0 +1,146 @@
+%%
+%% This is file `aicescover.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% aicescover.dtx  (with options: `package')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2013 by Elmar Peise
+%% 
+%% This file may be distributed and/or modified under the conditions of the LaTeX
+%% Project Public License, either version 1.2 of this license or (at your option)
+%% any later version.  The latest version of this license is an:
+%% 
+%%   http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{aicescover}
+ [2013/10/13 v1.2 AICES cover page package]
+\edef\vertbarcode{\the\catcode`\|}
+\catcode`\|=12
+\RequirePackage{tikz}
+\catcode`\|=\vertbarcode
+\RequirePackage[texcoord]{eso-pic}
+\newcommand\aicescovertitle[1]{
+    \providecommand\aicescover@title{}
+    \renewcommand\aicescover@title{#1}
+}
+\newcommand\aicescoverauthor[1]{
+    \providecommand\aicescover@author{}
+    \renewcommand\aicescover@author{#1}
+}
+\newcommand\aicescoverack[1]{
+    \providecommand\aicescover@ack{}
+    \renewcommand\aicescover@ack{#1}
+}
+\newlength\aicescover@paperwidth
+\newlength\aicescover@paperheight
+\setlength\aicescover@paperwidth\paperwidth
+\setlength\aicescover@paperheight\paperheight
+\@ifundefined{pdfpagewidth}{}{
+    \pgfmathsetlength\aicescover@paperwidth{ifthenelse(\paperwidth,\paperwidth,\pdfpagewidth)}
+    \pgfmathsetlength\aicescover@paperheight{ifthenelse(\paperheight,\paperheight,\pdfpageheight)}
+}
+\newcommand\aicescoverpage{
+    \@ifundefined{aicescover@title}{\aicescovertitle\@title}{}
+    \@ifundefined{aicescover@author}{\aicescoverauthor\@author}{}
+    \@ifundefined{aicescover@ack}{\aicescoverack{
+        Financial support from the\\
+        Deutsche Forschungsgemeinschaft (German Research Foundation)\\
+        through grant GSC 111 is gratefully acknowledged.
+    }}{}
+    \thispagestyle{empty}
+    \AddToShipoutPicture*{
+        \put(0,0){
+             \begin{tikzpicture}[overlay]
+                \sf
+                \node[
+                    minimum width=\aicescover@paperwidth,
+                    minimum height=\aicescover@paperheight,
+                    anchor=north west,
+                    inner sep=0pt,
+                    outer sep=0pt
+                    ] (page) at (-5pt, 0pt) {};
+                \path (page.south west) ++(4cm, 0cm) coordinate (x);
+                \fill[gray!50] (page.north west) ++(3cm, 0cm) rectangle (x);
+
+                \path (page.north west) ++(6cm, -2cm) coordinate (nw);
+                \path (page.north east) ++(-2cm, -2cm) coordinate (ne);
+                \path (page.south west) ++(6cm, 2cm) coordinate (sw);
+                \path (page.south east) ++(-2cm, 2cm) coordinate (se);
+
+                \pgfpointdiff{\pgfpointanchor{nw}{center}}
+                    {\pgfpointanchor{ne}{center}}
+                \newlength\titlewidth
+                \setlength\titlewidth\pgf@x
+
+                \node[anchor=north west, inner sep=0pt] at (nw) {
+                    \includegraphics[height=1.75cm]{aiceslogos/tongji.png}
+                } ++(0cm, -.25cm);
+                \node [anchor=north east, inner sep=0pt] at (ne) {
+                    \includegraphics[height=1.75cm]{aiceslogos/aices}
+                } ++(0cm, -.25cm);
+                \path (nw) ++(0cm, -2cm) coordinate (nw2);
+                \path (ne) ++(0cm, -2cm) coordinate (ne2);
+                \draw[thick] (ne2) -- (nw2) coordinate[midway] (nc);
+
+                \node[anchor=south west, inner sep=0pt] (ack) at (sw) {
+                    \begin{minipage}{\titlewidth}
+                        \fontsize{12}{15}\selectfont
+                        \aicescover@ack\par
+                    \end{minipage}
+                };
+                \path (ack.north west) ++(0cm, .5cm) coordinate (sw2);
+                \path (ack.north east) ++(0cm, .5cm) coordinate (se2);
+                \draw[ultra thick, red!70!black] (sw2) -- (se2);
+                \path (sw2) ++(0cm, .75cm) node[anchor=south west] (aices) {
+                    \begin{minipage}{\titlewidth}
+                        \fontsize{20}{25}\selectfont
+                        Tongji University\\
+                        School of Civil Engineering\\
+                        Department of Geotechnical Engineering\par
+                    \end{minipage}
+                };
+                \coordinate (sc) at (aices.north);
+
+                \path (nc) -- (sc) node[midway] {
+                    \begin{minipage}{\titlewidth}
+                        \renewcommand\footnotemark[1][]{}
+                        \renewcommand\footnote[1]{}
+                        \@ifundefined{thanks}{}{\renewcommand\thanks[1]{}}
+                        \centering
+                        {
+                            \fontsize{24}{30}\selectfont\bfseries
+                            \aicescover@title\par
+                        }
+
+                        \vspace{1cm}
+                        {
+                            \fontsize{15}{20}\selectfont
+                            \providecommand\and{}
+                            \renewcommand\and{
+                                \end{tabular}\hspace{.5cm}\begin{tabular}[t]{c}
+                            }
+                            \begin{tabular}[t]{c}
+                                \aicescover@author
+                            \end{tabular}
+                        }
+                    \end{minipage}
+                };
+            \end{tikzpicture}
+        }
+    }
+    \null\clearpage
+    \thispagestyle{empty}
+    \null\clearpage
+    \setcounter{page}{1}
+}
+\endinput
+%%
+%% End of file `aicescover.sty'.

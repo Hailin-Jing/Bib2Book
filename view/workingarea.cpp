@@ -36,7 +36,7 @@ WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
         window->UI()->actionSave->setEnabled(true);
         window->UI()->actionSaveAs->setEnabled(true);
         window->UI()->actionRun->setEnabled(true);
-        window->UI()->actionGenerate_TeX_File->setEnabled(true);
+        window->UI()->actionGenerate_TeX_Files->setEnabled(true);
         window->UI()->actionCompile->setEnabled(true);
     }
 
@@ -58,6 +58,8 @@ WorkingArea::WorkingArea(QString filename, int ID, QWidget *parent) :
 
     connect(SelectionModel, SIGNAL(currentChanged(QModelIndex,  QModelIndex)),
             this, SLOT(on_currentChanged(QModelIndex,  QModelIndex)));
+    connect(TableModel, SIGNAL(itemChanged(QStandardItem *)),
+            this, SLOT(on_itemChanged(QStandardItem *)));
 
     QStringList header = {tr("Label"), tr("Name"), tr("Path")};
     TableModel->setHorizontalHeaderLabels(header);
@@ -69,7 +71,7 @@ WorkingArea::~WorkingArea()
     window->UI()->actionMove_Up->setEnabled(false);
     window->UI()->actionMove_Down->setEnabled(false);
     window->UI()->actionRemove->setEnabled(false);
-    window->UI()->actionGenerate_TeX_File->setEnabled(true);
+    window->UI()->actionGenerate_TeX_Files->setEnabled(true);
     window->UI()->actionCompile->setEnabled(true);
     if (window != nullptr)
         window->addSequenceNumber(-1);
@@ -162,9 +164,9 @@ bool WorkingArea::saveFile(QString file_name, QString text, bool project)
         if (project) {
             Last_FileName = file_name;
             CurrentRootPath = Last_FileName;
+            setWindowTitle(Last_FileName);
+            refresh();
         }
-        setWindowTitle(Last_FileName);
-        refresh();
         return true;
     }
 }
@@ -241,8 +243,11 @@ bool WorkingArea::copyFiles()
     }
     QStringList Paths = PRO->bibliogarphies();
     QStringList Names = PRO->bibliogarphiesName();
-    for(int i = 0; i < Paths.length(); i++)
-        QFile::copy(Paths[i], TeXDirPath + "/PDFs/" + Names[i] + ".pdf");
+    for(int i = 0; i < Paths.length(); i++) {
+        QFileInfo fileInfo(Paths[i]);
+        QString Name = fileInfo.fileName().replace("~","-").replace("_","-").replace("+","-");
+        QFile::copy(Paths[i], TeXDirPath + "/PDFs/" + Name);
+    }
     return true;
 }
 
@@ -337,9 +342,15 @@ void WorkingArea::moveDown()
 void WorkingArea::remove()
 {
     QModelIndexList selectedIndex = SelectionModel->selectedIndexes();
-    foreach(QModelIndex index, selectedIndex) {
-        PRO->remove(index.row());
-        TableModel->removeRow(index.row());
+    QMap<int, int> rowMap;
+    foreach(QModelIndex index, selectedIndex)
+        rowMap.insert(index.row(), 0);
+    QMapIterator<int, int> rowMapIterator(rowMap);
+    rowMapIterator.toBack();
+    while (rowMapIterator.hasPrevious())
+    {
+        rowMapIterator.previous();
+        TableModel->removeRow(rowMapIterator.key());
     }
     Flag_IsSaved = false;
 }
@@ -432,12 +443,23 @@ void WorkingArea::on_currentChanged(const QModelIndex &current, const QModelInde
     window->UI()->actionMove_Up->setEnabled(true);
     window->UI()->actionMove_Down->setEnabled(true);
     window->UI()->actionRemove->setEnabled(true);
-    window->UI()->actionGenerate_TeX_File->setEnabled(true);
+    window->UI()->actionGenerate_TeX_Files->setEnabled(true);
     window->UI()->actionCompile->setEnabled(true);
+}
+
+void WorkingArea::on_itemChanged(QStandardItem *item)
+{
+    int row = item->row();
+    QString bibligraphyLabel = TableModel->data(TableModel->index(row,0)).toString();
+    QString bibligraphyName = TableModel->data(TableModel->index(row,1)).toString();
+    QString bibligraphyPath = TableModel->data(TableModel->index(row,2)).toString();
+    PRO->modify(row, bibligraphyLabel, bibligraphyName, bibligraphyPath);
 }
 
 void WorkingArea::on_treeView_doubleClicked(const QModelIndex &index)
 {
     QString Path = FileModel->filePath(index);
-    addFile(Path);
+    QFileInfo fileInfo(Path);
+    if (fileInfo.isFile() && fileInfo.suffix() == "pdf")
+        addFile(Path);
 }

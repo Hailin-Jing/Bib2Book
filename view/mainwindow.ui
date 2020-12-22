@@ -103,7 +103,7 @@
    <addaction name="actionMove_Down"/>
    <addaction name="actionRemove"/>
    <addaction name="separator"/>
-   <addaction name="actionGenerate_TeX_File"/>
+   <addaction name="actionGenerate_TeX_Files"/>
    <addaction name="actionCompile"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
@@ -120,7 +120,7 @@
      <x>0</x>
      <y>0</y>
      <width>1054</width>
-     <height>28</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -218,7 +218,7 @@
     <addaction name="actionMove_Down"/>
     <addaction name="actionRemove"/>
     <addaction name="separator"/>
-    <addaction name="actionGenerate_TeX_File"/>
+    <addaction name="actionGenerate_TeX_Files"/>
     <addaction name="actionCompile"/>
    </widget>
    <addaction name="menu_file"/>
@@ -593,7 +593,7 @@
     <string>Remove</string>
    </property>
   </action>
-  <action name="actionGenerate_TeX_File">
+  <action name="actionGenerate_TeX_Files">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -602,7 +602,7 @@
      <normaloff>:/icons/run.png</normaloff>:/icons/run.png</iconset>
    </property>
    <property name="text">
-    <string>Generate TeX File</string>
+    <string>Generate TeX Files</string>
    </property>
   </action>
   <action name="actionCompile">

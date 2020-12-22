@@ -311,7 +311,7 @@ void MainWindow::on_actionRemove_triggered()
         statusBar()->showMessage(tr("No window is selected!"), 4000);
 }
 
-void MainWindow::on_actionGenerate_TeX_File_triggered()
+void MainWindow::on_actionGenerate_TeX_Files_triggered()
 {
     WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
     on_actionSave_triggered();

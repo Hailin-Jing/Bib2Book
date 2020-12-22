@@ -76,6 +76,7 @@ private slots:
     void on_author_textChanged();
     void on_ack_textChanged();
     void on_currentChanged(const QModelIndex &, const QModelIndex &);
+    void on_itemChanged(QStandardItem *);
     void on_treeView_doubleClicked(const QModelIndex &index);
 
 private:
