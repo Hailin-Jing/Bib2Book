@@ -15,7 +15,3 @@ The program uses [LaTeX](https://www.latex-project.org/) to generate files, so y
 ## Installation
 
 Unzip the release file, click `Bib2Book_Setup.exe` to install, follow the instructions to finish the installation.
-
-## Program interface
-
-![Bib2Book](https://github.com/Hailin-Jing/Bib2Book/blob/main/images/Bib2Book.jpg)
