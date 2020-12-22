@@ -42,8 +42,8 @@
 \usepackage{shortvrb}
 \MakeShortVerb|
 
-\usepackage{hyperref}
-\title{Bib2Book -- A program to put your bibliographies together}
+\usepackage[colorlinks]{hyperref}
+\title{Bib2Book -- A program to put your bibliographies together\footnote{Project link: \url{https://github.com/Hailin-Jing/Bib2Book}}}
 \author{WANG Hailin\thanks{Tongji University, School of Civil Engineering, Department of Geotechnical Engineering, Github: \url{https://github.com/Hailin-Jing}, Homepage: \url{https://hailin.blog}}}
 \date{\today}
 
@@ -101,7 +101,7 @@
 
     Once you finish managing your document-list of your book, you can click the |Generate TeX file| button to generate \TeX files of your book. Then click |Compile| button to compile it to |PDF| file, you must install one of the \LaTeX\ distributions to finish this step. When finished, the directory of the |PDF| will be opened automatically.
 
-    \section{Project file}
+    \section{The Project file}
 
     This the format of the |Bib2Book| project file. You can simply write the |.b2b| file according to this format and change the suffix to |.b2b|.
 
@@ -190,7 +190,7 @@ This is the \TeX\ files the program generated.\medskip
 
 \section{Notes}
 
-Some notes should be noted. You can find the PDF book in \href{here}{}
+Some notes should be pointed out.
 \begin{itemize}
     \item You can only choose |PDF| files.
     \item Some |PDF| files that downloaded from \href{https://cnki.net/}{cnki} may be encrypted, errors may occur when compiling or blank page may appear in the |PDF| file.
@@ -198,7 +198,7 @@ Some notes should be noted. You can find the PDF book in \href{here}{}
 
 \section{Example}
 
-This is a example of |.b2b| file.
+This is a example of a |.b2b| file. You can find the project in \href{https://github.com/Hailin-Jing/Bib2Book/tree/main/release/documentation/example}{here}.
 
 \lstinputlisting[language=b2b, columns=fixed]{example/example.b2b} 
 
