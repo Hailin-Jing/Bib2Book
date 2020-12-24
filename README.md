@@ -1,4 +1,4 @@
-# Bib2Book - A program to put your bibliographies together.
+# Bib2Book - A program to put your bibliographies together
 
 ## Requirements
 
