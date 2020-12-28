@@ -18,4 +18,4 @@ Unzip the release file, click `Bib2Book_Setup.exe` to install, follow the instru
 
 ## Downloads
 
-You can download the program in [here](https://github.com/Hailin-Jing/Bib2Book/releases/tag/v1.0) or in [here](https://hailin.blog/wp-content/uploads/2020/12/Bib2Book.zip).
+You can download the program in [here](https://github.com/Hailin-Jing/Bib2Book/releases/tag/v1.0.1) or in [here](https://hailin.blog/wp-content/uploads/2020/12/Bib2Book.zip).
