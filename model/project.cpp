@@ -97,7 +97,7 @@ QString Project::generate()
         TeXString.append("\t\\label{bib:" + QString::number(i + 1) + "}\n");
         QFileInfo fileInfo(Bibliogarphies[i]);
         QString Name = fileInfo.fileName().replace("~","-").replace("_","-").replace("+","-");
-        TeXString.append("\t\\includepdf[pages=1-last]{PDFs/"+ Name + "}\n");
+        TeXString.append("\t\\includepdf[pages=1-last]{" + QString("PDFs/File-%1.pdf").arg(QString::number(i + 1)) + "}\n");
     }
     TeXString.append("\n\\end{document}");
 

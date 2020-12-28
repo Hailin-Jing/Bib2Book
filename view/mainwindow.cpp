@@ -318,8 +318,10 @@ void MainWindow::on_actionGenerate_TeX_Files_triggered()
     if (area != nullptr) {
         if (area->generate()) {
             statusBar()->showMessage(tr("TeX file generated!"), 4000);
-            area->openDirectory();
+            // area->openDirectory();
         }
+        else
+            statusBar()->showMessage(tr("File generated with errors!"), 4000);
     }
     else
         statusBar()->showMessage(tr("No window is selected!"), 4000);
@@ -328,15 +330,23 @@ void MainWindow::on_actionGenerate_TeX_Files_triggered()
 void MainWindow::on_actionCompile_triggered()
 {
     WorkingArea *area = qobject_cast<WorkingArea *>(ui->mdiArea->activeSubWindow()->widget());
+    if (!area->isRan()) {
+        QMessageBox::critical(this, tr("Error"), tr("File does not generate, please generate files!"));
+        return;
+    }
+    if (area->isGeneratedError()) {
+        QMessageBox::critical(this, tr("Error"), tr("File generated with error, please re-generated!"));
+        return;
+    }
     if (area != nullptr) {
         if (area->compile()) {
             statusBar()->showMessage(tr("TeX file generated!"), 4000);
-            QMessageBox::information(this, "Successfully", "Compiled Successfully!");
+            QMessageBox::information(this, tr("Successfully"), tr("Compiled Successfully!"));
             area->openDirectory();
         }
     }
     else {
         statusBar()->showMessage(tr("No window is selected!"), 4000);
-        QMessageBox::information(this, "Successfully", "Compiled failed!");
+        QMessageBox::information(this, tr("Successfully"), tr("Compiled failed!"));
     }
 }

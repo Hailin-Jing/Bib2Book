@@ -191,8 +191,11 @@ bool WorkingArea::generate()
     QFileInfo fileInfo(Last_FileName);
     QString TeXFilePath = fileInfo.filePath().replace(".b2b", ".tex");
     QString CoverTeXFilePath = fileInfo.path()+ "/Cover.tex";
+    Flag_IsGeneratedError = !checkFileExists();
+    if (Flag_IsGeneratedError)
+        return false;
     if (saveTex(TeXFilePath) && saveCoverTex(CoverTeXFilePath) && copyFiles() && generateBatFiles()) {
-        QMessageBox::information(this, "Successfully", "TeX file generated!");
+        QMessageBox::information(this, tr("Successfully"), tr("TeX file generated!"));
         Flag_IsRan = true;
         return true;
     }
@@ -203,7 +206,9 @@ bool WorkingArea::compile()
 {
     QFileInfo fileInfo(Last_FileName);
     QString CompileBatFilePath = fileInfo.path() + "/Compile.bat";
-    bool is_open_compile = QDesktopServices::openUrl(QUrl(CompileBatFilePath, QUrl::TolerantMode));
+    QString PDFFilePath = Last_FileName.replace(".b2b", ".pdf");
+
+    bool is_open_compile = QDesktopServices::openUrl(QUrl("file:///" + CompileBatFilePath, QUrl::TolerantMode));
     if(is_open_compile)
         return true;
     return false;
@@ -246,7 +251,7 @@ bool WorkingArea::copyFiles()
     for(int i = 0; i < Paths.length(); i++) {
         QFileInfo fileInfo(Paths[i]);
         QString Name = fileInfo.fileName().replace("~","-").replace("_","-").replace("+","-");
-        QFile::copy(Paths[i], TeXDirPath + "/PDFs/" + Name);
+        QFile::copy(Paths[i], TeXDirPath + QString("/PDFs/File-%1.pdf").arg(QString::number(i + 1)));
     }
     return true;
 }
@@ -269,10 +274,26 @@ bool WorkingArea::generateBatFiles()
                          "del " +fileName + ".aux\n"
                          "del " +fileName + ".log\n"
                          "del " +fileName + ".out\n"
-                         "del " +fileName + ".synctex.gz\n");
+                         "del " +fileName + ".synctex.gz\n\n"
+                         "start " + fileName + ".pdf");
     if (saveFile(CompileBatFilePath, CompileBatFile))
         return true;
     return false;
+}
+
+bool WorkingArea::checkFileExists()
+{
+    QString errorMessage;
+    foreach(QString filePath, PRO->bibliogarphies()) {
+        QFileInfo file(filePath);
+        if (!file.exists())
+            errorMessage.append(tr("File \"%1\" does not exist!\n").arg(filePath));
+    }
+    if (!errorMessage.isEmpty()) {
+        QMessageBox::critical(this, tr("Error"), errorMessage);
+        return false;
+    }
+    return true;
 }
 
 void WorkingArea::refresh()
@@ -295,6 +316,11 @@ bool WorkingArea::isSaved()
 bool WorkingArea::isRan()
 {
     return Flag_IsRan;
+}
+
+bool WorkingArea::isGeneratedError()
+{
+    return Flag_IsGeneratedError;
 }
 
 QString WorkingArea::lastFileName()

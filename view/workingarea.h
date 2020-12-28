@@ -23,12 +23,14 @@ class WorkingArea : public QWidget
     bool Flag_IsNew = true;
     bool Flag_IsSaved = false;
     bool Flag_IsRan = false;
+    bool Flag_IsGeneratedError = false;
     QString Last_FileName;
     QString CurrentRootPath;
 
     QFileSystemModel *FileModel;
     QStandardItemModel *TableModel;
     QItemSelectionModel *SelectionModel;
+
 
 public:
     explicit WorkingArea(QString filename, int ID, QWidget *parent = nullptr);
@@ -50,12 +52,14 @@ public:
     bool compile();
     bool copyFiles();
     bool generateBatFiles();
+    bool checkFileExists();
     void refresh();
 
     //bool isOpen();
     bool isNew();
     bool isSaved();
     bool isRan();
+    bool isGeneratedError();
     QString lastFileName();
 
     void setSavedState(bool Flag_IsSaved);

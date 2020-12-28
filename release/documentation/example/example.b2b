@@ -1,3 +1,4 @@
+
 ******************** Titlepage Information *******************
 Title      = 304dB TC304 database:\\ Multivariate soil/rock property databases
 Author     = Jianye Ching \and Kok-Kwang Phoon \and Marco DIgnazio \and Tim Tapani Länsivaara \and Guojun Cai \and Jianliang Chen\and Shuyin Feng \and Paul Vardanega \and Monica Löfman\and Leena Korkiala-Tanttu \and Dongming Zhang \and Yelu Zhou\and Hongwei Huang
@@ -18,3 +19,5 @@ Ack        = TC304 Engineering Practice of Risk Assessment \& Management \\\url{
   #  && FG-KSAT/6/1358 && \textcolor{blue}{Feng2019b}-Full AccessCorrelation of the hydraulic conductivity of fine-grained soils with water content ratio using a database && C:/Users/Hailin/OneDrive/Documents/GitHub/Bib2Book/release/documentation/example/Feng2019b-Full AccessCorrelation of the hydraulic conductivity of fine-grained soils with water content ratio using a database.pdf
   #  && ROCKMass/9/5876 && \textcolor{blue}{Ching2020}-Quasi-site-specific prediction for deformation modulus of rock mass && C:/Users/Hailin/OneDrive/Documents/GitHub/Bib2Book/release/documentation/example/Ching2020-Quasi-site-specific prediction for deformation modulus of rock mass.pdf
   #  && SH-CLAY/11/4051 && \textcolor{blue}{Zhang2020}-Multivariate probability distribution of shanghai clay properties && C:/Users/Hailin/OneDrive/Documents/GitHub/Bib2Book/release/documentation/example/Zhang dongming 2020-Multivariate probability distribution of shanghai clay properties.pdf
+  #  && 14 && Ching2020-Quasi-site-specific prediction for deformation modulus of rock mass && C:/Users/Hailin/OneDrive/Documents/GitHub/Bib2Book/release/documentation/example/Ching2020-Quasi-site-specific prediction for deformation modulus of rock mass.pdf
+  #  && 14 && Liu2016-Multivariate correlation among resilient modulus and cone penetration test parameters of cohesive subgrade soils && C:/Users/Hailin/OneDrive/Documents/GitHub/Bib2Book/release/documentation/example/Liu2016-Multivariate correlation among resilient modulus and cone penetration test parameters of cohesive subgrade soils.pdf
