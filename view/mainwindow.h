@@ -7,6 +7,15 @@
 #include "workingarea.h"
 #include "ui_workingarea.h"
 
+//网络相关头文件
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+//JSON相关头文件
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+
 namespace Ui {
 class MainWindow;
 }
@@ -22,9 +31,14 @@ class MainWindow : public QMainWindow
     QTranslator *trans = nullptr;
     QTranslator *trans_qt_zh_cn = nullptr;
 
+    QString currentVersion = "1.0.1";  //当前版本号
+    QNetworkAccessManager *manager;		//定义网络请求对象
+
 public:
     MainWindow(QString open_file_path = "", QWidget *parent = nullptr);
     ~MainWindow();
+
+    int parse_UpdateJSON(QString str);		//解析数据函数的声明
 
     Ui::MainWindow *UI();
 
@@ -55,6 +69,9 @@ private slots:
     void on_actionRemove_triggered();
     void on_actionGenerate_TeX_Files_triggered();
     void on_actionCompile_triggered();
+    void on_actionUpdate_triggered();
+
+    void replyFinished(QNetworkReply *reply);	//网络数据接收完成槽函数的声明
 
 private:
     Ui::MainWindow *ui;

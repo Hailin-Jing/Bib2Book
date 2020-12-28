@@ -24,5 +24,6 @@
         <file>icons/down.png</file>
         <file>icons/up.png</file>
         <file>icons/Compile.png</file>
+        <file>icons/update.png</file>
     </qresource>
 </RCC>
