@@ -99,6 +99,8 @@ Section "MainSection" SEC01
   File "release\libstdc++-6.dll"
   File "release\libwinpthread-1.dll"
   File "release\opengl32sw.dll"
+  File "release\libcrypto-1_1-x64.dll"
+  File "release\libssl-1_1-x64.dll"
   SetOutPath "$INSTDIR\platforms"
   File "release\platforms\qwindows.dll"
   SetOutPath "$INSTDIR"

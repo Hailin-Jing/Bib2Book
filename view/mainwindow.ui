@@ -120,7 +120,7 @@
      <x>0</x>
      <y>0</y>
      <width>1054</width>
-     <height>24</height>
+     <height>28</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -186,6 +186,8 @@
     </property>
     <addaction name="actionHelpDoc"/>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
+    <addaction name="actionUpdate"/>
    </widget>
    <widget class="QMenu" name="menu_Option">
     <property name="font">
@@ -611,6 +613,15 @@
    </property>
    <property name="text">
     <string>Compile</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/update.png</normaloff>:/icons/update.png</iconset>
+   </property>
+   <property name="text">
+    <string>Update</string>
    </property>
   </action>
  </widget>

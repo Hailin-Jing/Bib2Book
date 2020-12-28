@@ -31,14 +31,16 @@ class MainWindow : public QMainWindow
     QTranslator *trans = nullptr;
     QTranslator *trans_qt_zh_cn = nullptr;
 
-    QString currentVersion = "1.0.1";  //当前版本号
+    QString currentVersion = "V1.0.1";  //当前版本号
     QNetworkAccessManager *manager;		//定义网络请求对象
+    QNetworkReply *avatorReply;
+    bool iniCheck = true;
 
 public:
     MainWindow(QString open_file_path = "", QWidget *parent = nullptr);
     ~MainWindow();
 
-    int parse_UpdateJSON(QString str);		//解析数据函数的声明
+    int parse_UpdateJSON(QString str, bool iniCheck = false);		//解析数据函数的声明
 
     Ui::MainWindow *UI();
 
@@ -71,7 +73,9 @@ private slots:
     void on_actionCompile_triggered();
     void on_actionUpdate_triggered();
 
-    void replyFinished(QNetworkReply *reply);	//网络数据接收完成槽函数的声明
+    void httpReadyRead();
+    void httpDownloadProgress(qint64, qint64);
+    void httpFinished();
 
 private:
     Ui::MainWindow *ui;

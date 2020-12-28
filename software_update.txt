@@ -1,0 +1,16 @@
+{
+"Latest":
+	{
+		"LatestVerison":"V1.0.1",
+		"Url":"https://github.com/Hailin-Jing/Bib2Book/releases/latest",
+		"UpdateTime":"2020-12-28",
+      		"ReleaseNote":"    Fix some bugs. \n    Add function of checking update.\n"
+	},
+"V1.0":
+	{
+		"LatestVerison":"V1.0",
+		"Url":"https://github.com/Hailin-Jing/Bib2Book/releases/tag/v1.0",
+		"UpdateTime":"2020-12-22",
+       		"ReleaseNote":"The first release."
+	}
+}
