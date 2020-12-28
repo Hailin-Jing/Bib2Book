@@ -75,7 +75,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-int MainWindow::parse_UpdateJSON(QString str, bool iniCheck)
+void MainWindow::parse_UpdateJSON(QString str, bool iniCheck)
 {
     this->iniCheck = false;
     // QMessageBox msgBox;
@@ -85,7 +85,6 @@ int MainWindow::parse_UpdateJSON(QString str, bool iniCheck)
     {
         // qDebug() << "root格式错误";
         QMessageBox::critical(this, tr("Check failed"), tr("Server address or JSON format is wrong!"));
-        return -1;
     }
     if(root_Doc.isObject())
     {
@@ -105,7 +104,6 @@ int MainWindow::parse_UpdateJSON(QString str, bool iniCheck)
         else if (!iniCheck)
             QMessageBox::information(this, tr("Check for update"), tr("The current version is already the latest version!"));
     }
-    return 0;
 }
 
 Ui::MainWindow *MainWindow::UI()
@@ -405,6 +403,7 @@ void MainWindow::httpReadyRead()
     QString str = avatorReply->readAll(); //读取接收到的数据
     //    qDebug() << str;
     parse_UpdateJSON(str, iniCheck);
+    return;
 }
 
 void MainWindow::httpDownloadProgress(qint64 bytesRead, qint64 totalBytes)

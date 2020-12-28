@@ -40,7 +40,7 @@ public:
     MainWindow(QString open_file_path = "", QWidget *parent = nullptr);
     ~MainWindow();
 
-    int parse_UpdateJSON(QString str, bool iniCheck = false);		//解析数据函数的声明
+    void parse_UpdateJSON(QString str, bool iniCheck = false);		//解析数据函数的声明
 
     Ui::MainWindow *UI();
 
